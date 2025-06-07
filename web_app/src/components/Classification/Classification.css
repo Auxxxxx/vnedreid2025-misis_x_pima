@@ -1,0 +1,13 @@
+.dt__category {
+  color: var(--color-green);
+  font-weight: 600;
+}
+
+.dt__title {
+  color: white;
+  background-color: var(--color-green);
+}
+
+dt {
+  font-size: 24px;
+}
