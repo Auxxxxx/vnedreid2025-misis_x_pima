@@ -122,11 +122,12 @@ input[type="file"] {
 
 body {
   font-family: sans-serif;
+  border-radius: 12px;
 }
 
 :root {
   --color-blue: #00aaff;
-  --color-red: #ff6163;
-  --color-green: #97cf26;
-  --color-purple: #a169f7;
+  --color-red: #ff4053;
+  --color-green: #04e061;
+  --color-purple: #965eeb;
 }

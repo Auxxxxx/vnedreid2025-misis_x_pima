@@ -17,8 +17,12 @@ function App() {
 
   return (
     <div>
-      <InputBox onImagesUploaded={handleImagesUploaded} />
-      <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />
+      <header className="header">
+        <InputBox onImagesUploaded={handleImagesUploaded} />
+      </header>
+      <main className="content">
+        <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />
+      </main>
     </div>
   );
 }

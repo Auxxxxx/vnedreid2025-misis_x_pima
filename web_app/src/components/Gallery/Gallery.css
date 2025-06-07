@@ -25,7 +25,7 @@
   right: 8px;
   width: 28px;
   height: 28px;
-  background: #ff4444;
+  background: var(--color-red);
   color: white;
   border: none;
   border-radius: 50%;
@@ -34,4 +34,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 }
