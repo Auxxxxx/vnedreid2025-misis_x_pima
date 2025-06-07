@@ -1,3 +1,8 @@
+dl {
+  display: grid;
+  row-gap: 16px;
+}
+
 .dt__category {
   color: var(--color-green);
   font-weight: 600;
@@ -8,6 +13,14 @@
   background-color: var(--color-green);
 }
 
-dt {
-  font-size: 24px;
+.dd__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+dd span {
+  background-color: white;
+  border-radius: 12px;
+  padding: 5px 20px;
+  border: 1px solid var(--color-green);
 }

@@ -19,20 +19,15 @@
 }
 
 .information {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   row-gap: 16px;
-  justify-content: center;
 }
 .media {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   gap: 24px;
   justify-content: center;
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: 600;
 }
 
 .processing-video {
@@ -48,6 +43,6 @@ h2 {
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  row-gap: 64px;
   align-items: center;
 }

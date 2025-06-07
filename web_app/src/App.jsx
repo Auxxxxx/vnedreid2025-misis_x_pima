@@ -2,20 +2,19 @@ import { useState, useRef } from "react";
 import "./App.css";
 import InputBox from "./components/InputBox/InputBox";
 import Gallery from "./components/Gallery/Gallery";
-import AnalyticsChart from "./components/AnalyticsChart/AnalyticsChart";
 import Classification from "./components/Classification/Classification";
 import loadingGif from "./assets/images/0001-0030.webm";
 
 function App() {
   const [galleryImages, setGalleryImages] = useState([]);
-  const [isProcessing, setIsProcessing] = useState(false); // Переименовали для ясности
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const videoRef = useRef(null);
 
   const handleImagesUploaded = (newImages) => {
     setGalleryImages(newImages);
     setIsProcessing(true);
-    // Запускаем видео при загрузке изображения
+    // видео при загрузке изображения
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
@@ -24,7 +23,7 @@ function App() {
   const handleRemoveImage = (index) => {
     URL.revokeObjectURL(galleryImages[index]);
     setGalleryImages([]);
-    setIsProcessing(false); // Выключаем индикатор
+    setIsProcessing(false);
   };
 
   return (
@@ -41,9 +40,6 @@ function App() {
           <h2 className="information__title">#классификация</h2>
           <div className="information__text">
             <Classification />
-          </div>
-          <div className="information__graphics">
-            <AnalyticsChart></AnalyticsChart>
           </div>
         </section>
         <section className="media">
@@ -66,7 +62,7 @@ function App() {
               </div>
             ) : (
               <div className="placeholder">
-                как только машина будет в гараже - сразу же покажем!
+                как только машина будет в гараже — сразу же покажем!
               </div>
             )}
           </div>

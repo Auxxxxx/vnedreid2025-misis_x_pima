@@ -5,15 +5,15 @@ const InputBox = ({ onImagesUploaded, hasImage }) => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
 
-    // Ограничиваем загрузку только одним файлом
+    // ограничение
     if (files.length > 1) {
       alert("Можно загрузить только одно изображение");
-      e.target.value = null; // Сбрасываем выбор файлов
+      e.target.value = null; // сброс выбора файлов
       return;
     }
 
     const imageUrl = URL.createObjectURL(files[0]);
-    onImagesUploaded([imageUrl]); // Передаем массив с одним изображением
+    onImagesUploaded([imageUrl]);
 
     e.target.value = null;
   };
