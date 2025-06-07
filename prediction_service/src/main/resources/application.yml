@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /prediction
+
+spring:
+  application:
+    name: prediction-service
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.example.predictionservice: INFO
+    org.springdoc: INFO
+    root: INFO 
