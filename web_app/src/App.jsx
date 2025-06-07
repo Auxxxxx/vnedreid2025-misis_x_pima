@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import InputBox from "./components/InputBox/InputBox";
 import Gallery from "./components/Gallery/Gallery";
+import AnalyticsChart from "./components/AnalyticsChart/AnalyticsChart";
 
 function App() {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -27,8 +28,10 @@ function App() {
       <main className="content">
         <section className="information">
           <h1 className="visually-hidden">MISIS x PIMA x AVITO</h1>
-          <h2 className="information__title">#анализ повреждений</h2>
-          <div className="information__graphics">ГРАФИКИ</div>
+          <h2 className="information__title">#классификация</h2>
+          <div className="information__graphics">
+            <AnalyticsChart></AnalyticsChart>
+          </div>
         </section>
         <section className="media">
           <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />

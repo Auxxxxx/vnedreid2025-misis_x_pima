@@ -32,7 +32,7 @@ const InputBox = ({ onImagesUploaded, hasImage }) => {
         <span className="upload-text">
           {hasImage
             ? "(⁠⊙⁠_⁠◎⁠) хотите заменить?"
-            : "(⁠ﾉ⁠*⁠0⁠*⁠)⁠ﾉ загрузите изображение"}
+            : "(⁠ﾉ⁠*⁠0⁠*⁠)⁠ﾉ завозите машину"}
         </span>
       </label>
     </div>

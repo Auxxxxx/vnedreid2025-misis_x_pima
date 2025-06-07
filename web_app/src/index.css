@@ -122,7 +122,11 @@ input[type="file"] {
 
 body {
   font-family: sans-serif;
-  border-radius: 12px;
+  margin: 0; /* Важно для полного покрытия */
+  background: url("/src/assets/images/background.jpg") no-repeat center center
+    fixed;
+  background-size: cover; /* или 'contain' в зависимости от потребностей */
+  min-height: 100vh; /* Минимальная высота на весь экран */
 }
 
 :root {
