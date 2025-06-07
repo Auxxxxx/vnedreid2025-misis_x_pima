@@ -7,18 +7,22 @@ function App() {
   const [galleryImages, setGalleryImages] = useState([]);
 
   const handleImagesUploaded = (newImages) => {
-    setGalleryImages((prev) => [...prev, ...newImages]);
+    // Заменяем все изображения новым (а не добавляем)
+    setGalleryImages(newImages);
   };
 
   const handleRemoveImage = (index) => {
     URL.revokeObjectURL(galleryImages[index]);
-    setGalleryImages((prev) => prev.filter((_, i) => i !== index));
+    setGalleryImages([]); // Полностью очищаем галерею
   };
 
   return (
     <div>
       <header className="header">
-        <InputBox onImagesUploaded={handleImagesUploaded} />
+        <InputBox
+          onImagesUploaded={handleImagesUploaded}
+          hasImage={galleryImages.length > 0}
+        />
       </header>
       <main className="content">
         <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />
