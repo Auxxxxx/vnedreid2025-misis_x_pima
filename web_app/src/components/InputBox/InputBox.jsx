@@ -28,9 +28,11 @@ const InputBox = ({ onImagesUploaded, hasImage }) => {
         className="visually-hidden"
       />
       <label htmlFor="multi-upload" className="custom-upload-button">
-        <span className="upload-icon">📁</span>
+        <span className="upload-icon"></span>
         <span className="upload-text">
-          {hasImage ? "хотите заменить?" : "загрузите изображение"}
+          {hasImage
+            ? "(⁠⊙⁠_⁠◎⁠) хотите заменить?"
+            : "(⁠ﾉ⁠*⁠0⁠*⁠)⁠ﾉ загрузите изображение"}
         </span>
       </label>
     </div>

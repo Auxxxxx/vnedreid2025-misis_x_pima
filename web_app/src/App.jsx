@@ -25,7 +25,15 @@ function App() {
         />
       </header>
       <main className="content">
-        <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />
+        <section className="information">
+          <h1 className="visually-hidden">MISIS x PIMA x AVITO</h1>
+          <h2 className="information__title">#анализ повреждений</h2>
+          <div className="information__graphics">ГРАФИКИ</div>
+        </section>
+        <section className="media">
+          <Gallery images={galleryImages} onRemoveImage={handleRemoveImage} />
+          <div className="visualuzation">ЗДЕСЬ БУДЕТ 3Д ПИМА</div>
+        </section>
       </main>
     </div>
   );

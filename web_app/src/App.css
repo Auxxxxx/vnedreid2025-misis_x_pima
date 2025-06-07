@@ -8,4 +8,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 32px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  justify-content: center;
+}
+
+.information {
+  display: grid;
+  row-gap: 16px;
+  justify-content: center;
+}
+.media {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 32px;
 }
