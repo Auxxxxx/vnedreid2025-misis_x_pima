@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Prediction Service API
+  description: API for Prediction Service with ping endpoint
+  version: 1.0.0
+  contact:
+    name: Development Team
+    email: dev@example.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /api/ping:
+    get:
+      tags:
+        - Ping
+      summary: Ping endpoint
+      description: Check if service is running
+      operationId: ping
+      responses:
+        '200':
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+              example:
+                message: "pong"
+                timestamp: 1640995200000
+                status: "UP"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PingResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Response message
+          example: "pong"
+        timestamp:
+          type: integer
+          format: int64
+          description: Timestamp of response
+          example: 1640995200000
+        status:
+          type: string
+          description: Service status
+          example: "UP"
+      required:
+        - message
+        - timestamp
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+        status:
+          type: integer
+          description: HTTP status code
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Error message 

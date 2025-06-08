@@ -1,0 +1,26 @@
+services:
+  prediction-service:
+    image: ${PREDICTION_SERVICE_IMAGE}
+    container_name: prediction-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+      - ML_API_HOST=${ML_API_HOST}
+      - ML_API_PORT=${ML_API_PORT}
+      - ML_API_ENDPOINT=${ML_API_ENDPOINT}
+      - ML_API_TIMEOUT=${ML_API_TIMEOUT}
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/prediction/api/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - prediction-network
+
+networks:
+  prediction-network:
+    driver: bridge 
