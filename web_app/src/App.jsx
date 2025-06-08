@@ -9,6 +9,7 @@ function App() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null); // Добавляем состояние для загруженного изображения
 
   const videoRef = useRef(null);
 
@@ -21,6 +22,11 @@ function App() {
     setIsProcessing(true);
     setAnalysisResult(null); // сбрасываем старый результат
 
+    // Сохраняем загруженное изображение для отображения в галерее
+    const imageUrl = URL.createObjectURL(file);
+    setUploadedImage(imageUrl);
+    setGalleryImages([imageUrl]);
+
     // проигрываем гифку загрузки
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
@@ -32,49 +38,35 @@ function App() {
 
   const sendImageToBackend = async (file) => {
     const formData = new FormData();
-    formData.append("file", file);
-    const file_size = file.size;
-    console.log(`Файл доставлен, размер ${file_size}`);
+    formData.append("file", file); // Изменяем имя поля на "image" согласно API
 
     try {
       const response = await fetch(
-        "http://77.95.201.174:8080/prediction/api/submit-photo",
+        "http://109.73.196.162/prediction/api/car-damage/analyze", // Изменяем URL на новый endpoint
         {
           method: "POST",
-
-          body: formData, // всё, браузер сам всё добавит
-
+          body: formData,
           headers: {
             Origin: "*",
           },
         }
       );
 
-      console.log(response);
-      formData.forEach((value, key) => {
-        console.log("key %s: value %s", key, value);
-      });
-
       if (!response.ok) {
         throw new Error("Ошибка при отправке изображения");
       }
 
-      const result = await response.json();
+      const result = await response.text();
 
-      // если backend возвращает только путь, допиши хост
-      const fullPhotoUrl = result.res_photo.startsWith("http")
-        ? result.res_photo
-        : `http://109.73.196.162${result.res_photo}`;
-      const fullGifUrl = result.res_gif.startsWith("http")
-        ? result.res_gif
-        : `http://109.73.196.162${result.res_gif}`;
+      // Преобразуем ответ бэкенда в нужный формат
+      const formattedResult = {
+        category: result, // Простой ответ от бэкенда
+        percentage: 0, // Можно добавить расчет или оставить 0
+        res_photo: uploadedImage, // Используем загруженное изображение
+        res_gif: null, // GIF не используется в новом API
+      };
 
-      setGalleryImages([fullPhotoUrl]);
-      setAnalysisResult({
-        ...result,
-        res_photo: fullPhotoUrl,
-        res_gif: fullGifUrl,
-      });
+      setAnalysisResult(formattedResult);
     } catch (error) {
       console.error("Ошибка:", error);
     } finally {
@@ -85,6 +77,7 @@ function App() {
   const handleRemoveImage = (index) => {
     URL.revokeObjectURL(galleryImages[index]);
     setGalleryImages([]);
+    setUploadedImage(null);
     setIsProcessing(false);
     setAnalysisResult(null);
   };
@@ -100,31 +93,18 @@ function App() {
       <main className="content">
         <section className="information">
           <h1 className="visually-hidden">MISIS x PIMA x AVITO</h1>
-          <h2 className="information__title">#классификация</h2>
+          <h2 className="information__title">#результаты</h2>
           <div className="information__text">
-            <Classification />
             {analysisResult && (
               <div className="analysis">
-                <h3>Результаты анализа:</h3>
-                <ul>
-                  <li>Категория: {analysisResult.category}</li>
-                  <li>Вмятина: {analysisResult.dent ? "Да" : "Нет"}</li>
-                  <li>Царапина: {analysisResult.scratch ? "Да" : "Нет"}</li>
-                  <li>Ржавчина: {analysisResult.rust ? "Да" : "Нет"}</li>
-                  <li>
-                    Деформация: {analysisResult.deformation ? "Да" : "Нет"}
-                  </li>
-                  <li>Степень повреждения: {analysisResult.percentage}%</li>
-                </ul>
-                {analysisResult.res_gif && (
-                  <video
-                    src={analysisResult.res_gif}
-                    autoPlay
-                    loop
-                    muted
-                    style={{ maxWidth: "100%", marginTop: "1em" }}
-                  />
-                )}
+                <dl>
+                  <dt>
+                    <span className="dt__title">состояние</span>
+                  </dt>
+                  <dd>
+                    <span className="dd__span">{analysisResult.category}</span>
+                  </dd>
+                </dl>
               </div>
             )}
           </div>
@@ -149,7 +129,9 @@ function App() {
               </div>
             ) : (
               <div className="placeholder">
-                как только машина будет в гараже — сразу же покажем!
+                {galleryImages.length === 0
+                  ? "как только машина будет в гараже — сразу же покажем!"
+                  : "изображение автомобиля загружено и готово к анализу"}
               </div>
             )}
           </div>
