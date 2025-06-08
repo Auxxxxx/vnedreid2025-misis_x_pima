@@ -7,13 +7,13 @@ const Classification = (props) => {
       <dt className="dt__category">категория машины:</dt>
       <dd>5, отличный выбор!</dd>
       <dt>
-        <span className="dt__title">#степень повреждения в процентах</span>
+        <span className="dt__title">степень повреждения в процентах</span>
       </dt>
       <dd>
         <span className="dd__span">5</span>
       </dd>
       <dt>
-        <span className="dt__title">#тип повреждения</span>
+        <span className="dt__title">тип повреждения</span>
       </dt>
       <dd className="dd__list">
         <span className="dd__span">#царапины</span>

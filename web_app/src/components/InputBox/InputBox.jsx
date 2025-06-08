@@ -4,6 +4,7 @@ import "./InputBox.css";
 const InputBox = ({ onImagesUploaded, hasImage }) => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
+    console.log(files);
 
     // ограничение
     if (files.length > 1) {
@@ -12,8 +13,7 @@ const InputBox = ({ onImagesUploaded, hasImage }) => {
       return;
     }
 
-    const imageUrl = URL.createObjectURL(files[0]);
-    onImagesUploaded([imageUrl]);
+    onImagesUploaded(files);
 
     e.target.value = null;
   };
