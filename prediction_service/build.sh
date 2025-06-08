@@ -34,8 +34,17 @@ echo "📌 Image tag: $PREDICTION_SERVICE_IMAGE"
 
 # Записываем переменные в .env файл
 echo "PREDICTION_SERVICE_IMAGE=\"$PREDICTION_SERVICE_IMAGE\"" > .env
+echo "CONTEXT_PATH=\"/prediction\"" >> .env
+
+# ML API Configuration
+echo "ML_API_HOST=109.73.196.162" >> .env
+echo "ML_API_PORT=80" >> .env
+echo "ML_API_ENDPOINT=/model/damage-detection/analyze" >> .env
+echo "ML_API_TIMEOUT=30000" >> .env
 
 print_success "Environment variable set locally: PREDICTION_SERVICE_IMAGE=$PREDICTION_SERVICE_IMAGE"
+print_success "Context path set locally: CONTEXT_PATH=/prediction"
+print_success "ML API configuration set locally"
 
 print_message "Building JAR file..."
 mvn clean package -DskipTests

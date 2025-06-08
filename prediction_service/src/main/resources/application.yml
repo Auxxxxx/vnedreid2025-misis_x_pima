@@ -7,6 +7,14 @@ spring:
   application:
     name: prediction-service
 
+# ML API Configuration - новая модель
+ml:
+  api:
+    host: ${ML_API_HOST:109.73.196.162}
+    port: ${ML_API_PORT:80}
+    endpoint: ${ML_API_ENDPOINT:/model/damage-detection/analyze}
+    timeout: ${ML_API_TIMEOUT:60000}
+
 springdoc:
   api-docs:
     path: /v3/api-docs

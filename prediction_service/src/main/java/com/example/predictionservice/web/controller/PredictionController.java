@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,6 +85,10 @@ public class PredictionController {
             
             return ResponseEntity.ok(result);
 
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(
+                createErrorResponse("Ошибка при чтении файла: " + e.getMessage())
+            );
         } catch (Exception e) {
             return ResponseEntity.status(500).body(
                 createErrorResponse("Ошибка при обработке изображения: " + e.getMessage())

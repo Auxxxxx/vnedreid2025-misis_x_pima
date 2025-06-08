@@ -197,6 +197,52 @@ curl -X POST http://localhost:8080/prediction/api/submit-photo \
   -H "Content-Type: multipart/form-data"
 ```
 
+## Конфигурация ML API
+
+Сервис интегрирован с ML API для анализа изображений. Конфигурация осуществляется через переменные среды:
+
+| Переменная | Описание | Значение по умолчанию |
+|------------|----------|----------------------|
+| `ML_API_HOST` | Хост ML API сервиса | `localhost` |
+| `ML_API_PORT` | Порт ML API сервиса | `8000` |
+| `ML_API_ENDPOINT` | Endpoint ML API | `/predict` |
+| `ML_API_TIMEOUT` | Таймаут запросов (мс) | `30000` |
+
+**Пример ML API ответа:**
+```json
+{
+  "car_bbox": [100, 150, 200, 250],
+  "damage_ratio": 0.15,
+  "detections": {
+    "rust": [
+      {
+        "bbox": {
+          "x_min": 100,
+          "y_min": 150,
+          "x_max": 120,
+          "y_max": 170,
+          "width": 20,
+          "height": 20
+        },
+        "confidence": 0.95
+      }
+    ],
+    "dent": [],
+    "scratch": []
+  }
+}
+```
+
+### Запуск ML API
+
+Убедитесь, что ML API запущен на указанном хосте и порту перед использованием сервиса предсказаний.
+
+**Пример запуска ML API (если у вас есть соответствующий сервис):**
+```bash
+# Запуск ML API на localhost:8000
+python ml_api_server.py --host localhost --port 8000
+```
+
 ## Документация API
 
 После запуска приложения доступна документация Swagger UI:
